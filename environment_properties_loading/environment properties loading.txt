@@ -1,0 +1,11 @@
+in command line loading different environment
+
+<!-- environment properties loading -->
+   <bean id="propertyPlaceholderConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:cma_${env}.properties</value>
+            </list>
+        </property>
+    </bean>
