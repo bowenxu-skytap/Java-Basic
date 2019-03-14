@@ -1,12 +1,13 @@
 package Java8Lambda;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class Unit1Exercise {
-	
+public class MethodReferenceExample2 {
+
 	public static void main(String[] args) {
 		List<Person> people = Arrays.asList(new Person("Charles", "Dickens", 60), 
 											new Person("Lewis", "Carroll", 42),
@@ -14,14 +15,9 @@ public class Unit1Exercise {
 											new Person("Charlotte", "Bronte", 45),
 											new Person("Matthew", "Arnold", 39));
 		
-		//step 1: sort list by last name
-		Collections.sort(people, (a, b) -> a.getLastName().compareTo(b.getLastName()));
-		
 		//step 2: create a method that prints all elements in the list
-		performAllWithCondition(people, p -> true, p -> System.out.println(p));
+		performAllWithCondition(people, p -> true, System.out::println); // p -> method(p)
 		
-		//step 3: create a method that prints all people that have last name beginning with C
-		performAllWithCondition(people, p -> p.getLastName().startsWith("C"), p -> System.out.println(p.getLastName()));
 	}
 	
 	public static void performAllWithCondition(List<Person> people, Predicate<Person> predicate, Consumer<Person> consumer) {
