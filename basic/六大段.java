@@ -1,4 +1,23 @@
-1. Immutable Class
+package basic;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+
+
+
+//1. Immutable Class
 /**
  * How to define an immutable class?
  * 1. class is final
@@ -6,7 +25,7 @@
  * 3. define constructors for initialization
  * 4. only getters, no setters
  */
-public final class Person {
+final class Person {
 	private String name; // official is "private final String name;"
 	private double salary;	
 	public Person() {}
@@ -33,12 +52,12 @@ public final class Person {
 	}
 }
 
-2. Cloneable
+//2. Cloneable
 /**
  * 1. implements Cloneable
  * 2. Override clone()
  */
-public class Original implements Cloneable{
+class Original implements Cloneable{
 	private String str;
 	public Original() {}
 	public Original(String str) {
@@ -56,11 +75,11 @@ public class Original implements Cloneable{
 	}
 }
 
-3. Hashcode & Equals
+//3. Hashcode & Equals
 /**
  * 1. Override hashCode() and equals()
  */
-public class WrappedString {
+class WrappedString {
 	private String str;
 	public WrappedString() {}
 	public WrappedString(String str) {
@@ -86,7 +105,7 @@ public class WrappedString {
 	}
 }
 
-4. Singleton
+//4. Singleton
 /**
  * Singleton Pattern 
  * 1. private constructor
@@ -99,7 +118,7 @@ public class WrappedString {
  * Thread-safe: good performance, memory-safe
  */
 
-public class MySingle {
+class MySingle {
 	private static MySingle instance;
 	private MySingle() {}
 	public static MySingle getInstance() {
@@ -114,12 +133,12 @@ public class MySingle {
 	}
 }
 
-5. Comparable & Comparator
-(1)Comparable
+//5. Comparable & Comparator
+//(1)Comparable
 /**
  * Implement Comparable
  */
-public class BeanA implements Comparable<BeanA> {
+class BeanA implements Comparable<BeanA> {
 	private int x;
 	public BeanA() {}
 	public BeanA(int x) {
@@ -142,24 +161,24 @@ public class BeanA implements Comparable<BeanA> {
 		}
 	}
 }
-public class TestComparable {
+class TestComparable {
 	@Test
 	public void test() {
 		List<BeanA> list = new ArrayList<BeanA>();
 		list.add(new BeanA(5));
 		list.add(new BeanA(7));
 		list.add(new BeanA(3));
-		assertEquals(5, list.get(0).getX());
-		assertEquals(7, list.get(1).getX());
-		assertEquals(3, list.get(2).getX());
+		Assertions.assertEquals(5, list.get(0).getX());
+		Assertions.assertEquals(7, list.get(1).getX());
+		Assertions.assertEquals(3, list.get(2).getX());
 		Collections.sort(list);
-		assertEquals(3, list.get(0).getX());
-		assertEquals(5, list.get(1).getX());
-		assertEquals(7, list.get(2).getX());
+		Assertions.assertEquals(3, list.get(0).getX());
+		Assertions.assertEquals(5, list.get(1).getX());
+		Assertions.assertEquals(7, list.get(2).getX());
 	}
 }
-(2)Comparator
-public class BeanB {
+//(2)Comparator
+class BeanB {
 	private int x;
 	public BeanB() {}
 	public BeanB(int x) {
@@ -172,27 +191,28 @@ public class BeanB {
 		this.x = x;
 	}
 }
+class TestComparator {
 	@Test
-	public void test() {
+	public void test1() {
 		List<BeanB> list = new ArrayList<BeanB>();
 		list.add(new BeanB(5));
 		list.add(new BeanB(7));
 		list.add(new BeanB(3));
-		assertEquals(5, list.get(0).getX());
-		assertEquals(7, list.get(1).getX());
-		assertEquals(3, list.get(2).getX());
+		Assertions.assertEquals(5, list.get(0).getX());
+		Assertions.assertEquals(7, list.get(1).getX());
+		Assertions.assertEquals(3, list.get(2).getX());
 		Collections.sort(list, new Comparator<BeanB>(){
 			@Override
 			public int compare(BeanB first, BeanB second) {
 				return first.getX() - second.getX();
 			}
 		});
-		assertEquals(3, list.get(0).getX());
-		assertEquals(5, list.get(1).getX());
-		assertEquals(7, list.get(2).getX());		
+		Assertions.assertEquals(3, list.get(0).getX());
+		Assertions.assertEquals(5, list.get(1).getX());
+		Assertions.assertEquals(7, list.get(2).getX());		
 	}
 
-6. Iterator
+//6. Iterator
 	/**
 	 * Iterate List/Set/Map
 	 */
@@ -273,3 +293,4 @@ public class BeanB {
 			System.out.println(each.getKey() + ": " + each.getValue());
 		}
 	}
+}
